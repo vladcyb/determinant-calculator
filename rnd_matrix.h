@@ -42,7 +42,7 @@ namespace rnd_matrix{
         std::cout << '\n';
         for(int i = 0; i < n; ++i){
             for(int j = 0; j < n; ++j){
-                std::cout << std::setw(max_signs+1) << std::setfill(' ') << a[i][j];
+                std::cout << std::setw(max_signs+1) << a[i][j];
             }
             std::cout << '\n';
         }
