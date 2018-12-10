@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include "rnd_matrix.h"
+#include "rnd_matrix.cpp"
 
 int det(std::vector< std::vector<int> >& v){
     int n = v.size();
