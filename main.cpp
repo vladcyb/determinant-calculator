@@ -1,4 +1,4 @@
-#include "rnd_matrix.cpp"
+#include "mymatrix.cpp"
 
 int main (){
     srand( unsigned ( time(0) ) );
