@@ -157,7 +157,7 @@ int main (){
                 determ();
                 break;
             case 1:
-                rnd_matrix::init();
+                randomMatrix();
                 break;
         }
     }
