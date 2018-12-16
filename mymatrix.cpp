@@ -14,9 +14,9 @@ int inputInt(){
 }
 
 int favorite, n, max_signs, resN;
-std::vector<std::vector<int>> a;
+matrix a;
 
-int det(std::vector< std::vector<int> >& v){
+int det(matrix& v){
     int n = v.size();
     if (n == 1){
         return v[0][0];
@@ -24,7 +24,7 @@ int det(std::vector< std::vector<int> >& v){
         return v[0][0] * v[1][1] - v[0][1] * v[1][0];
     }
 
-    std::vector<std::vector<int> > det1(n - 1);
+    matrix det1(n - 1);
     for (std::vector<int>& el : det1){
         el.resize(n - 1);
     }
@@ -57,10 +57,10 @@ int det(std::vector< std::vector<int> >& v){
 
 }
 
-std::vector< std::vector<int> > minor1(std::vector< std::vector<int> >& v, int i, int j){
+matrix minor1(matrix& v, int i, int j){
     int N = v.size();
     int n = N - 1;
-    std::vector< std::vector<int> > v1(n);
+    matrix v1(n);
     for(int i = 0; i < n; ++i){
         v1[i].resize(n);
     }
@@ -94,14 +94,14 @@ std::vector< std::vector<int> > minor1(std::vector< std::vector<int> >& v, int i
     return v1;
 }
 
-std::vector< std::vector<int> > complement(std::vector< std::vector<int> >& v){
+matrix complement(matrix& v){
     int n = v.size();
-    std::vector< std::vector<int> > v1(n);
+    matrix v1(n);
     for(int i = 0; i < n; ++i){
         v1[i].resize(n);
     }
 
-    std::vector< std::vector<int> > v2;
+    matrix v2;
 
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
@@ -123,7 +123,7 @@ void determ(){
     }
 
     std::cout << "Enter the elements:\n\n";
-    std::vector<std::vector<int>> v(n);
+    matrix v(n);
 
 
     for(int i = 0; i < n; ++i){
@@ -227,7 +227,7 @@ void add_col(const int x, const int y){
 
 void fill_matrix(){
 
-    a = std::vector<std::vector<int> >(n);
+    a = matrix(n);
     for(int i = 0; i < n; i++){
         a[i] = std::vector<int>(n);
         for(int j = 0; j < n; ++j){
