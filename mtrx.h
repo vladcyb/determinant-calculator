@@ -10,11 +10,9 @@
 typedef std::vector<std::vector<int>> matrix;
 int inputInt();
 int signs(int x);
-void find_max_signs(matrix& mtrx);
-void print_matrix(matrix& mtrx);
-void add_row(const int x, const int y);
-void add_col(const int x, const int y);
-void fill_matrix(matrix& mtrx);
+int findMaxSigns(matrix& mtrx);
+void printMatrix(matrix& mtrx);
+void fillMatrix(matrix& mtrx);
 void randomMatrix();
 int det(matrix& v);
 matrix minor1(matrix& v, int i, int j);

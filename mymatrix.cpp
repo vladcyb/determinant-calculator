@@ -13,8 +13,7 @@ int inputInt(){
     return n;
 }
 
-int favorite, n, max_signs, resN;
-matrix a;
+int favorite, n, resN;
 
 int det(matrix& v){
     int n = v.size();
@@ -156,9 +155,9 @@ int signs(int x){
     return res;
 }
 
-void find_max_signs(){
+int findMaxSigns(matrix& a){
     int sgns;
-    max_signs = 0;
+    int max_signs = 0;
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
             sgns = signs(a[i][j]);
@@ -167,21 +166,23 @@ void find_max_signs(){
             }
         }
     }
-
+    return max_signs;
 }
 
-void print_matrix(){
+void printMatrix(matrix& a){
+    fillMatrix(a);
+    int max_signs = findMaxSigns(a);
     std::cout << '\n';
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
-            std::cout << std::setw(max_signs+1) << a[i][j];
+            std::cout << std::setw(max_signs + 1) << a[i][j];
         }
         std::cout << '\n';
     }
 }
 
 
-void add_row(const int x, const int y){
+void add_row(matrix& a, const int x, const int y){
 
     int count = 0;
 
@@ -203,7 +204,7 @@ void add_row(const int x, const int y){
 
 }
 
-void add_col(const int x, const int y){
+void add_col(matrix& a, const int x, const int y){
 
     int count = 0;
 
@@ -225,13 +226,12 @@ void add_col(const int x, const int y){
 }
 
 
-void fill_matrix(){
-
-    a = matrix(n);
+void fillMatrix(matrix& mtrx){
+    mtrx = matrix(n);
     for(int i = 0; i < n; i++){
-        a[i] = std::vector<int>(n);
+        mtrx[i] = std::vector<int>(n);
         for(int j = 0; j < n; ++j){
-            a[i][j] = 0;
+            mtrx[i][j] = 0;
         }
     }
 
@@ -246,26 +246,26 @@ void fill_matrix(){
             --x;
         }
 
-        a[i][i] = x;
+        mtrx[i][i] = x;
         y /= x;
 
     }
-    a[n - 1][n - 1] = y;
+    mtrx[n - 1][n - 1] = y;
 
     for(int i = 0; i < 10; ++i){
         for(int j = i + 1; j < n; ++j){
-            a[i][j] = rand() % 10 + 1;
+            mtrx[i][j] = rand() % 10 + 1;
         }
     }
 
     for(int i = 0; i < n / 2; ++i){
-        add_row(n - i - 1, i);
-        add_col(i, n - i - 1);
+        add_row(mtrx, n - i - 1, i);
+        add_col(mtrx, i, n - i - 1);
     }
 }
 
 void randomMatrix(){
-
+    matrix random_matrix;
     std::cout << "Enter your favorite number: ";
     favorite = -1;
     while(true){
@@ -291,9 +291,9 @@ void randomMatrix(){
     }
 
     for(int i = 0; i < resN; ++i){
-        fill_matrix();
-        find_max_signs();
-        print_matrix();
+        fillMatrix(random_matrix);
+        findMaxSigns(random_matrix);
+        printMatrix(random_matrix);
     }
 
     std::cout << "\n\n";
