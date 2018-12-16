@@ -9,14 +9,14 @@
 
 typedef std::vector<std::vector<int>> matrix;
 int inputInt();
-int signs(int x);
-int findMaxSigns(matrix& mtrx);
-void printMatrix(matrix& mtrx);
-void fillMatrix(matrix& mtrx, int, int);
+int signs(int);
+int findMaxSigns(matrix&);
+void printMatrix(matrix&);
+void fillMatrix(matrix&, int, int);
 void randomMatrix();
-int det(matrix& v);
-matrix minor1(matrix& v, int i, int j);
-matrix complement(matrix& v);
+int det(matrix&);
+matrix minor1(matrix&, int, int);
+matrix complement(matrix&);
 void determ();
 
 #endif
