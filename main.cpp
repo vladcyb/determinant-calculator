@@ -1,6 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <chrono>
 #include "rnd_matrix.cpp"
 
 int det(std::vector< std::vector<int> >& v){
@@ -49,7 +46,7 @@ std::vector< std::vector<int> > minor1(std::vector< std::vector<int> >& v, int i
     int n = N - 1;
     std::vector< std::vector<int> > v1(n);
     for(int i = 0; i < n; ++i){
-        v1.at(i).resize(n);
+        v1[i].resize(n);
     }
     int k = 0, l, y = 0, x;
     while(k < N){
@@ -70,7 +67,7 @@ std::vector< std::vector<int> > minor1(std::vector< std::vector<int> >& v, int i
                 }
             }
 
-            v1.at(y).at(x) = v.at(k).at(l);
+            v1[y][x] = v[k][l];
             ++x;
             ++l;
         }
@@ -85,7 +82,7 @@ std::vector< std::vector<int> > complement(std::vector< std::vector<int> >& v){
     int n = v.size();
     std::vector< std::vector<int> > v1(n);
     for(int i = 0; i < n; ++i){
-        v1.at(i).resize(n);
+        v1[i].resize(n);
     }
 
     std::vector< std::vector<int> > v2;
@@ -93,7 +90,7 @@ std::vector< std::vector<int> > complement(std::vector< std::vector<int> >& v){
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
             v2 = minor1(v, i, j);
-            v1.at(i).at(j) = (i + j) % 2 ? -det(v2) : det(v2);
+            v1[i][j] = (i + j) % 2 ? -det(v2) : det(v2);
         }
     }
     return v1;
@@ -114,9 +111,9 @@ void determ(){
 
 
     for(int i = 0; i < n; ++i){
-        v.at(i).resize(n);
+        v[i].resize(n);
         for(int j = 0; j < n; ++j){
-            v.at(i).at(j) = inputInt();
+            v[i][j] = inputInt();
         }
     }
 
@@ -146,7 +143,7 @@ int main (){
 
         std::vector<std::string> strV = { "1", "2" };
         for(unsigned int i = 0; i < strV.size(); ++i){
-            if (s == strV.at(i)){
+            if (s == strV[i]){
                 cmdCode = i;
                 break;
             }

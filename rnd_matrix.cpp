@@ -1,8 +1,9 @@
 #include <iostream>
 #include <cmath>
-#include <cstdlib>
 #include <algorithm>
 #include <iomanip>
+#include <vector>
+#include <chrono>
 
 int inputInt(){
     int n;
@@ -18,7 +19,7 @@ int inputInt(){
 }
 
 int favorite, n, max_signs, resN;
-std::vector<std::vector<int> > a;
+std::vector<std::vector<int>> a;
 
 int signs(int x){
     int res = 0;
