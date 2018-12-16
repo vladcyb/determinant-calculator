@@ -1,4 +1,4 @@
-#include "mtrx.h"
+#include "mymatrix.h"
 
 int inputInt(){
     int n;
@@ -12,8 +12,6 @@ int inputInt(){
     }
     return n;
 }
-
-int favorite, resN;
 
 int det(matrix& v){
     int n = v.size();
@@ -230,7 +228,7 @@ void add_col(matrix& a, const int x, const int y){
 }
 
 
-void fillMatrix(matrix& mtrx, int n){
+void fillMatrix(matrix& mtrx, int n, int favorite){
     mtrx = matrix(n);
     for(int i = 0; i < n; i++){
         mtrx[i] = std::vector<int>(n);
@@ -271,7 +269,7 @@ void fillMatrix(matrix& mtrx, int n){
 void randomMatrix(){
     matrix random_matrix;
     std::cout << "Enter your favorite number: ";
-    favorite = -1;
+    int favorite = -1;
     while(true){
         favorite = inputInt();
         if (favorite <= 0){
@@ -288,14 +286,14 @@ void randomMatrix(){
         std::exit(1);
     }
     std::cout << "Enter number of determinants: ";
-    resN = inputInt();
+    int resN = inputInt();
 
     if (n < 2){
         return;
     }
 
     for(int i = 0; i < resN; ++i){
-        fillMatrix(random_matrix, n);
+        fillMatrix(random_matrix, n, favorite);
         findMaxSigns(random_matrix);
         printMatrix(random_matrix);
     }

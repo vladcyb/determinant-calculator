@@ -1,5 +1,5 @@
-#ifndef MTRX_H
-#define MTRX_H
+#ifndef MYMATRIX_H
+#define MYMATRIX_H
 
 #include <iostream>
 #include <vector>
@@ -12,7 +12,7 @@ int inputInt();
 int signs(int x);
 int findMaxSigns(matrix& mtrx);
 void printMatrix(matrix& mtrx);
-void fillMatrix(matrix& mtrx);
+void fillMatrix(matrix& mtrx, int, int);
 void randomMatrix();
 int det(matrix& v);
 matrix minor1(matrix& v, int i, int j);
