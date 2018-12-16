@@ -21,3 +21,4 @@ $RECYCLE.BIN/
 *.exe
 diff.txt
 *.gch
+.atom-build.yml
