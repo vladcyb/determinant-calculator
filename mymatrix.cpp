@@ -13,7 +13,7 @@ int inputInt(){
     return n;
 }
 
-int favorite, n, resN;
+int favorite, resN;
 
 int det(matrix& v){
     int n = v.size();
@@ -132,11 +132,14 @@ void determ(){
         }
     }
 
-    auto startTime = std::chrono::steady_clock::now();
+    std::cout << std::endl << "You entered: ";
+    printMatrix(v);
 
+    auto startTime = std::chrono::steady_clock::now();
     std::cout << std::endl << "Answer: " << det(v) << "\n\n";
     auto stopTime = std::chrono::steady_clock::now();
-    std::cout << '\n' << std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime).count() << " ms\n";
+    std::cout << '\n' << std::chrono::duration_cast<std::chrono::milliseconds>
+                (stopTime - startTime).count() << " ms\n";
 
 }
 
@@ -158,6 +161,7 @@ int signs(int x){
 int findMaxSigns(matrix& a){
     int sgns;
     int max_signs = 0;
+    int n = a.size();
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
             sgns = signs(a[i][j]);
@@ -170,9 +174,9 @@ int findMaxSigns(matrix& a){
 }
 
 void printMatrix(matrix& a){
-    fillMatrix(a);
     int max_signs = findMaxSigns(a);
     std::cout << '\n';
+    int n = a.size();
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
             std::cout << std::setw(max_signs + 1) << a[i][j];
@@ -185,7 +189,7 @@ void printMatrix(matrix& a){
 void add_row(matrix& a, const int x, const int y){
 
     int count = 0;
-
+    int n = a.size();
     for(int i = 0; i < n; ++i){
         if (fabs(a[x][i] - a[y][i]) < fabs(a[x][i] + a[y][i])){
             ++count;
@@ -207,7 +211,7 @@ void add_row(matrix& a, const int x, const int y){
 void add_col(matrix& a, const int x, const int y){
 
     int count = 0;
-
+    int n = a.size();
     for(int i = 0; i < n; ++i){
         if (fabs(a[i][x] - a[i][y]) > fabs(a[i][x] + a[i][y])){
             ++count;
@@ -226,7 +230,7 @@ void add_col(matrix& a, const int x, const int y){
 }
 
 
-void fillMatrix(matrix& mtrx){
+void fillMatrix(matrix& mtrx, int n){
     mtrx = matrix(n);
     for(int i = 0; i < n; i++){
         mtrx[i] = std::vector<int>(n);
@@ -278,7 +282,7 @@ void randomMatrix(){
     }
 
     std::cout << "Enter number of rows and columns: ";
-    n = inputInt();
+    int n = inputInt();
     if(n < 2){
         std::cout << "Error!" << std::endl;
         std::exit(1);
@@ -291,7 +295,7 @@ void randomMatrix(){
     }
 
     for(int i = 0; i < resN; ++i){
-        fillMatrix(random_matrix);
+        fillMatrix(random_matrix, n);
         findMaxSigns(random_matrix);
         printMatrix(random_matrix);
     }
