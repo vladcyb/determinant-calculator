@@ -2,35 +2,26 @@
 
 int main (){
     srand( unsigned ( time(0) ) );
-    std::string s;
-    int cmdCode;
+    char c ='a';
 
-    while(true){
+    while(c != '0'){
         std::cout << "1 - calculate determinant\n";
         std::cout << "2 - random matrix by determinant\n";
         std::cout << "0 - exit\n\n";
-        cmdCode = -1;
-        std::cin >> s;
+        std::cin >> c;
 
-        if (s == "0"){
-            break;
-        }
-
-        std::vector<std::string> strV = { "1", "2" };
-        for(unsigned int i = 0; i < strV.size(); ++i){
-            if (s == strV[i]){
-                cmdCode = i;
+        switch(c){
+            case '0':
+                std::cout << "exiting...";
                 break;
-            }
-        }
-
-        switch(cmdCode){
-            case 0:
+            case '1':
                 determ();
                 break;
-            case 1:
+            case '2':
                 randomMatrix();
                 break;
+            default:
+                std::cout << "incorrect option\n";
         }
     }
 
