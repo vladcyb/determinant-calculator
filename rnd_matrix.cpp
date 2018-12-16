@@ -4,6 +4,18 @@
 #include <algorithm>
 #include <iomanip>
 
+int inputInt(){
+    int n;
+    std::cin.clear();
+    std::cin >> n;
+    if (std::cin.fail()){
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Error!" << std::endl;
+        std::exit(1);
+    }
+    return n;
+}
 
 namespace rnd_matrix{
     int favorite, n, max_signs, resN;
@@ -137,7 +149,7 @@ namespace rnd_matrix{
         std::cout << "Enter your favorite number: ";
         favorite = -1;
         while(true){
-            std::cin >> favorite;
+            favorite = inputInt();
             if (favorite <= 0){
                 std::cout << "Error! Enter n > 0: ";
             }else{
@@ -146,9 +158,9 @@ namespace rnd_matrix{
         }
 
         std::cout << "Enter number of rows and columns: ";
-        std::cin >> n;
+        n = inputInt();
         std::cout << "Enter number of determinants: ";
-        std::cin >> resN;
+        resN = inputInt();
 
         if (n < 2){
             return;

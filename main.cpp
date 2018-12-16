@@ -99,19 +99,6 @@ std::vector< std::vector<int> > complement(std::vector< std::vector<int> >& v){
     return v1;
 }
 
-int inputInt(){
-    int n;
-    std::cin.clear();
-    std::cin >> n;
-    if (std::cin.fail()){
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Error!" << std::endl;
-        std::exit(1);
-    }
-    return n;
-}
-
 void determ(){
     int n;
     std::cout << "Enter n: ";
