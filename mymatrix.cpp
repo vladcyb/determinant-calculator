@@ -1,5 +1,12 @@
 #include "mymatrix.h"
 
+void checkNext(){
+    if (std::cin.peek() == '.'){
+        std::cout << "Error! Only integer numbers are allowed!" << std::endl;
+        std::exit(1);
+    }
+}
+
 int inputInt(){
     int n;
     std::cin.clear();
@@ -7,7 +14,7 @@ int inputInt(){
     if (std::cin.fail()){
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Error!" << std::endl;
+        std::cout << "Error! Only integer numbers are allowed!" << std::endl;
         std::exit(1);
     }
     return n;
@@ -113,7 +120,7 @@ void determ(){
     int n;
     std::cout << "Enter n: ";
     n = inputInt();
-
+    checkNext();
     if (n < 2){
         std::cout << "Error: n < 2\n";
         return;
@@ -130,6 +137,7 @@ void determ(){
         }
     }
 
+    checkNext();
     std::cout << std::endl << "You entered: ";
     printMatrix(v);
 
