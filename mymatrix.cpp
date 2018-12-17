@@ -20,7 +20,7 @@ int inputInt(){
     return n;
 }
 
-int det(matrix& v){
+int det(matrix& v, int idx_from, int idx_to){
     int n = v.size();
     if (n == 1){
         return v[0][0];
@@ -37,7 +37,7 @@ int det(matrix& v){
 
     int s = 0;
     int x;
-    for (int i = 0; i < n; ++i){
+    for (int i = idx_from; i <= idx_to; ++i){
         x = 0;
         for(int j = 1; j < n; ++j){
             vect1.clear();
@@ -49,16 +49,14 @@ int det(matrix& v){
             }
             det1[j - 1] = vect1;
         }
-        x = det(det1);
+        x = det(det1, 0, det1.size() - 1);
         if(i % 2){
             s -= x * v[0][i];
         }else{
             s += x * v[0][i];
         }
     }
-
     return s;
-
 }
 
 matrix minor1(matrix& v, int i, int j){
@@ -76,7 +74,6 @@ matrix minor1(matrix& v, int i, int j){
                 break;
             }
         }
-
         l = 0;
         x = 0;
         while(l < N){
@@ -86,14 +83,12 @@ matrix minor1(matrix& v, int i, int j){
                     break;
                 }
             }
-
             v1[y][x] = v[k][l];
             ++x;
             ++l;
         }
         ++y;
         ++k;
-
     }
     return v1;
 }
@@ -110,10 +105,16 @@ matrix complement(matrix& v){
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
             v2 = minor1(v, i, j);
-            v1[i][j] = (i + j) % 2 ? -det(v2) : det(v2);
+            v1[i][j] = (i + j) % 2 ? -det(v2, 0, v2.size() - 1) :
+                                      det(v2, 0, v2.size() - 1);
         }
     }
     return v1;
+}
+
+void writeDeterminantToX (int& x, matrix& v, int idx_from, int idx_to)
+{
+    x = det(v, idx_from, idx_to);
 }
 
 void determ(){
@@ -129,7 +130,6 @@ void determ(){
     std::cout << "Enter the elements:\n\n";
     matrix v(n);
 
-
     for(int i = 0; i < n; ++i){
         v[i].resize(n);
         for(int j = 0; j < n; ++j){
@@ -142,11 +142,28 @@ void determ(){
     printMatrix(v);
 
     auto startTime = std::chrono::steady_clock::now();
-    std::cout << std::endl << "Answer: " << det(v) << "\n\n";
+    int answer = 0;
+    if (v.size() > 3){
+        int a[4];
+        std::thread t1(writeDeterminantToX, std::ref(a[0]), std::ref(v), 0, v.size() / 4 - 1);
+        std::thread t2(writeDeterminantToX, std::ref(a[1]), std::ref(v), v.size() / 4, v.size() / 2 - 1);
+        std::thread t3(writeDeterminantToX, std::ref(a[2]), std::ref(v), v.size() / 2, v.size() * 3 / 4 - 1);
+        std::thread t4(writeDeterminantToX, std::ref(a[3]), std::ref(v), v.size() * 3 / 4, v.size() - 1);
+        t1.join();
+        t2.join();
+        t3.join();
+        t4.join();
+        for(int i = 0; i < 4; ++i){
+            answer += a[i];
+        }
+    }else{
+        answer = det(v, 0, v.size() - 1);
+    }
+
+    std::cout << std::endl << "Answer: " << answer << "\n\n";
     auto stopTime = std::chrono::steady_clock::now();
     std::cout << '\n' << std::chrono::duration_cast<std::chrono::milliseconds>
                 (stopTime - startTime).count() << " ms\n";
-
 }
 
 int signs(int x){
@@ -190,7 +207,6 @@ void printMatrix(matrix& a){
         std::cout << '\n';
     }
 }
-
 
 void add_row(matrix& a, const int x, const int y){
 

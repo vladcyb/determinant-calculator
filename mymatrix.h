@@ -6,6 +6,7 @@
 #include <cmath>
 #include <iomanip>
 #include <chrono>
+#include <thread>
 
 typedef std::vector<std::vector<int>> matrix;
 int inputInt();
@@ -14,7 +15,7 @@ int findMaxSigns(matrix&);
 void printMatrix(matrix&);
 void fillMatrix(matrix&, int, int);
 void randomMatrix();
-int det(matrix&);
+int det(matrix&, int, int);
 matrix minor1(matrix&, int, int);
 matrix complement(matrix&);
 void determ();
