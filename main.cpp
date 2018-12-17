@@ -4,14 +4,14 @@ int main (){
     srand( unsigned ( time(0) ) );
     char c ='a';
 
-    while(c != '0'){
+    while(c != 'q'){
         std::cout << "1 - calculate determinant\n";
         std::cout << "2 - random matrix by determinant\n";
-        std::cout << "0 - exit\n\n";
+        std::cout << "q - exit\n\n";
         std::cin >> c;
 
         switch(c){
-            case '0':
+            case 'q':
                 std::cout << "exiting...";
                 break;
             case '1':
