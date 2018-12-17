@@ -12,7 +12,7 @@ int main (){
 
         switch(c){
             case 'q':
-                std::cout << "exiting...";
+                std::cout << "exiting..." << std::endl;
                 break;
             case '1':
                 determ();
