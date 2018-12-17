@@ -93,25 +93,6 @@ matrix minor1(matrix& v, int i, int j){
     return v1;
 }
 
-matrix complement(matrix& v){
-    int n = v.size();
-    matrix v1(n);
-    for(int i = 0; i < n; ++i){
-        v1[i].resize(n);
-    }
-
-    matrix v2;
-
-    for(int i = 0; i < n; ++i){
-        for(int j = 0; j < n; ++j){
-            v2 = minor1(v, i, j);
-            v1[i][j] = (i + j) % 2 ? -det(v2, 0, v2.size() - 1) :
-                                      det(v2, 0, v2.size() - 1);
-        }
-    }
-    return v1;
-}
-
 void writeDeterminantToX (int& x, matrix& v, int idx_from, int idx_to)
 {
     x = det(v, idx_from, idx_to);
