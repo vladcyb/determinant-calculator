@@ -59,42 +59,7 @@ int det(matrix& v, int idx_from, int idx_to){
     return s;
 }
 
-matrix minor1(matrix& v, int i, int j){
-    int N = v.size();
-    int n = N - 1;
-    matrix v1(n);
-    for(int i = 0; i < n; ++i){
-        v1[i].resize(n);
-    }
-    int k = 0, l, y = 0, x;
-    while(k < N){
-        if (k == i){
-            ++k;
-            if (k == N){
-                break;
-            }
-        }
-        l = 0;
-        x = 0;
-        while(l < N){
-            if (l == j){
-                ++l;
-                if (l == N){
-                    break;
-                }
-            }
-            v1[y][x] = v[k][l];
-            ++x;
-            ++l;
-        }
-        ++y;
-        ++k;
-    }
-    return v1;
-}
-
-void writeDeterminantToX (int& x, matrix& v, int idx_from, int idx_to)
-{
+void writeDeterminantToX (int& x, matrix& v, int idx_from, int idx_to){
     x = det(v, idx_from, idx_to);
 }
 
@@ -147,7 +112,7 @@ void determ(){
                 (stopTime - startTime).count() << " ms\n";
 }
 
-int signs(int x){
+int len(int x){
     int res = 0;
     if (x < 0){
         ++res;
@@ -162,35 +127,34 @@ int signs(int x){
     return res;
 }
 
-int findMaxSigns(matrix& a){
+int findMaxLength(matrix& a){
     int sgns;
-    int max_signs = 0;
+    int max_len = 0;
     int n = a.size();
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
-            sgns = signs(a[i][j]);
-            if (sgns > max_signs){
-                max_signs = sgns;
+            sgns = len(a[i][j]);
+            if (sgns > max_len){
+                max_len = sgns;
             }
         }
     }
-    return max_signs;
+    return max_len;
 }
 
 void printMatrix(matrix& a){
-    int max_signs = findMaxSigns(a);
+    int max_len = findMaxLength(a);
     std::cout << '\n';
     int n = a.size();
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < n; ++j){
-            std::cout << std::setw(max_signs + 1) << a[i][j];
+            std::cout << std::setw(max_len + 1) << a[i][j];
         }
         std::cout << '\n';
     }
 }
 
-void add_row(matrix& a, const int x, const int y){
-
+void addRow(matrix& a, const int x, const int y){
     int count = 0;
     int n = a.size();
     for(int i = 0; i < n; ++i){
@@ -198,7 +162,6 @@ void add_row(matrix& a, const int x, const int y){
             ++count;
         }
     }
-
     if (count > n / 2){
         for(int i = 0; i < n; ++i){
             a[x][i] -= a[y][i];
@@ -208,11 +171,9 @@ void add_row(matrix& a, const int x, const int y){
             a[x][i] += a[y][i];
         }
     }
-
 }
 
-void add_col(matrix& a, const int x, const int y){
-
+void addCol(matrix& a, const int x, const int y){
     int count = 0;
     int n = a.size();
     for(int i = 0; i < n; ++i){
@@ -220,7 +181,6 @@ void add_col(matrix& a, const int x, const int y){
             ++count;
         }
     }
-
     if (count > n / 2){
         for(int i = 0; i < n; ++i){
             a[i][x] -= a[i][y];
@@ -231,7 +191,6 @@ void add_col(matrix& a, const int x, const int y){
         }
     }
 }
-
 
 void fillMatrix(matrix& mtrx, int n, int favorite){
     mtrx = matrix(n);
@@ -266,8 +225,8 @@ void fillMatrix(matrix& mtrx, int n, int favorite){
     }
 
     for(int i = 0; i < n / 2; ++i){
-        add_row(mtrx, n - i - 1, i);
-        add_col(mtrx, i, n - i - 1);
+        addRow(mtrx, n - i - 1, i);
+        addCol(mtrx, i, n - i - 1);
     }
 }
 
@@ -299,7 +258,6 @@ void randomMatrix(){
 
     for(int i = 0; i < resN; ++i){
         fillMatrix(random_matrix, n, favorite);
-        findMaxSigns(random_matrix);
         printMatrix(random_matrix);
     }
 
