@@ -117,13 +117,10 @@ int len(int x){
     if (x < 0){
         ++res;
     }
-    while(x != 0){
+    do{
         ++res;
         x /= 10;
-    }
-    if(!res){
-        ++res;
-    }
+    }while(x != 0);
     return res;
 }
 
